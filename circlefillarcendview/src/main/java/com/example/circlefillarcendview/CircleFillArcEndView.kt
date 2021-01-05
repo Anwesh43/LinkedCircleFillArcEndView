@@ -23,7 +23,7 @@ val arcFactor : Float = 2.9f
 val rFactor : Float = 8.9f
 val delay : Long = 20
 val parts : Int = 5
-val scGap : Float = 0.02f
+val scGap : Float = 0.02f / parts
 val deg : Float = 360f
 val backColor : Int = Color.parseColor("#BDBDBD")
 
@@ -131,7 +131,7 @@ class CircleFillArcEndView(ctx : Context) : View(ctx) {
         private var prev : CFAENode? = null
 
         init {
-
+            addNeighbor()
         }
 
         fun addNeighbor() {
@@ -156,7 +156,7 @@ class CircleFillArcEndView(ctx : Context) : View(ctx) {
         fun getNext(dir : Int, cb : () -> Unit) : CFAENode {
             var curr : CFAENode? = prev
             if (dir == 1) {
-                curr = this
+                curr = next
             }
             if (curr != null) {
                 return curr
