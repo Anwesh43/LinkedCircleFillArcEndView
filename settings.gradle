@@ -1,0 +1,3 @@
+include ':circlefillarcendview'
+include ':app'
+rootProject.name = "LinkedCircleFillArcEndView"
