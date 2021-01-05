@@ -122,4 +122,45 @@ class CircleFillArcEndView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    data class CFAENode(var i : Int, val state : State = State()) {
+
+        private var next : CFAENode? = null
+        private var prev : CFAENode? = null
+
+        init {
+
+        }
+
+        fun addNeighbor() {
+            if (i < colors.size - 1) {
+                next = CFAENode(i + 1)
+                next?.prev = this
+            }
+        }
+
+        fun draw(canvas : Canvas, paint : Paint) {
+            canvas.drawCFAENode(i, state.scale, paint)
+        }
+
+        fun update(cb : (Float) -> Unit) {
+            state.update(cb)
+        }
+
+        fun startUpdating(cb : () -> Unit) {
+            state.startUpdating(cb)
+        }
+
+        fun getNext(dir : Int, cb : () -> Unit) : CFAENode {
+            var curr : CFAENode? = prev
+            if (dir == 1) {
+                curr = this
+            }
+            if (curr != null) {
+                return curr
+            }
+            cb()
+            return this
+        }
+    }
 }
