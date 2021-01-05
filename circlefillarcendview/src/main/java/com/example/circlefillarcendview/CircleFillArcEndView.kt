@@ -211,4 +211,13 @@ class CircleFillArcEndView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : CircleFillArcEndView {
+            val view : CircleFillArcEndView = CircleFillArcEndView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
